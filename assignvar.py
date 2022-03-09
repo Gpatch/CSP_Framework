@@ -1,7 +1,11 @@
 class AssignedVar:
-    def __init__(self, var, value):
+    def __init__(self, var, value, domain):
         self.var_name = var
         self.value = value
+        self.domain = domain
+
+    def __str__(self):
+        return f'{self.var_name} = {self.value} \n@{self.domain}'
 
     def get_var_name(self):
         return self.var_name
@@ -14,3 +18,6 @@ class AssignedVar:
 
     def set_var_value(self, value):
         self.value = value
+
+    def set_var_domain(self, domain):
+        self.domain = domain

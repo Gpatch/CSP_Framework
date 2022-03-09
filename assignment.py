@@ -6,6 +6,9 @@ class Assignment:
     def __init__(self, assignment):
         self.assignment = assignment
 
+    def __str__(self):
+        return str([str(item) for item in self.assignment])
+
     def lookup_var(self, var):
         result = -math.inf
         for i in self.assignment:
@@ -32,6 +35,3 @@ class Assignment:
                 break
         if not exists:
             self.assignment.append(new_var)
-
-
-
