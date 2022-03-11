@@ -4,6 +4,7 @@ from assignvar import AssignedVar
 
 class Assignment:
     def __init__(self, assignment):
+        # assignment = [AssignedVar]
         self.assignment = assignment
 
     def __str__(self):
@@ -12,22 +13,22 @@ class Assignment:
     def lookup_var(self, var):
         result = -math.inf
         for i in self.assignment:
-            if i == var:
+            if i.get_var_name() == var:
                 result = i.get_var_value()
                 break
         return result
 
     def is_var_assigned(self, var):
-        result = None
+        result = False
         for i in self.assignment:
             if i == var:
-                result = i
+                result = True
                 break
         return result
 
-    def assign(self, var_name, var_val):
+    def assign(self, var_name, var_val, domain):
         exists = False
-        new_var = AssignedVar(var_name, var_val)
+        new_var = AssignedVar(var_name, var_val, domain)
         for i in self.assignment:
             if i.get_var_name() == new_var.get_var_name():
                 i.set_value(var_val)
