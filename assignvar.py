@@ -1,26 +1,19 @@
-class AssignedVar:
-    def __init__(self, var, value, domain):
-        self.var_name = var
-        self.value = value
-        self.domain = domain
+class AV:
+    def __init__(self, name: str, value):
+        self._name = name
+        self._value = value
 
     def __str__(self):
-        return f'{self.var_name} = {self.value}'
+        return f'{self._name} = {self._value}'
 
-    def get_var_name(self):
-        return self.var_name
+    @property
+    def name(self):
+        return self._name
 
-    def get_var_value(self):
-        return self.value
+    @property
+    def value(self):
+        return self._value
 
-    def get_var_domain(self):
-        return self.domain
-
-    def set_var_name(self, name):
-        self.var_name = name
-
-    def set_var_value(self, value):
-        self.value = value
-
-    def set_var_domain(self, domain):
-        self.domain = domain
+    @value.setter
+    def value(self, val):
+        self._value = val

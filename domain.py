@@ -1,23 +1,33 @@
 class Domain:
-    def __init__(self, domain):
-        self.domain = domain
+    def __init__(self, var: str, domain: list):
+        self._var = var
+        self._domain = domain
 
     def __str__(self):
-        return f'@{self.domain}'
+        return f'{self._var} @ {self._domain}'
 
-    def add_to_domain(self, val):
+    @property
+    def var(self):
+        return self._var
+
+    @property
+    def domain(self):
+        return self._domain
+
+    @domain.setter
+    def domain(self, dom):
+        self._domain = dom
+
+    def domain_add(self, val):
         exists = False
-        for i in self.domain:
-            if i == val:
+        for d in self._domain:
+            if d == val:
                 exists = True
                 break
-        if not exists:
-            self.domain.append(val)
+            else:
+                self._domain.append(val)
 
-    def del_from_domain(self, val):
-        for i in self.domain:
-            if i == val:
-                self.domain.remove(val)
-                break
+    def domain_del(self, val):
+        self._domain.remove(val)
 
 
