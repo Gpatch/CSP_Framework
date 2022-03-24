@@ -3,7 +3,7 @@ from relations.relation import Relation
 
 class VarsDiff(Relation):
     def __init__(self, variables, assignment):
-        super().__init__(variables, assignment, len(assignment.assignment))
+        super().__init__(variables, assignment, len(assignment._assignment))
 
     def set_relation(self):
         if self.req_assignment_elem < 2:

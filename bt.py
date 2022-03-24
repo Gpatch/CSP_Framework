@@ -7,7 +7,7 @@ class BT:
     def __init__(self, csp):
         self._csp = csp
 
-    def bt_recursion(self, csp, nodes=0):
+    def bt_recursion(self, csp):
         if csp.is_complete():
             return True
 
@@ -17,12 +17,9 @@ class BT:
         for v in curr_domain:
             if csp.is_consistent_value(curr_var, v):
                 self._csp.assign(curr_var, v)
-                if self.bt_recursion(csp, nodes + 1):
+                if self.bt_recursion(csp):
                     return True
                 else:
                     csp.unassign(curr_var)
-            else:
-                nodes += 1
-
 
 

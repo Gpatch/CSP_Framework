@@ -8,7 +8,7 @@ class Assignment:
 
     def remove_av(self, var):
         for a in self._assignment:
-            if a.name == var:
+            if a._name == var:
                 self._assignment.remove(a)
 
     def print_assignment(self):
@@ -18,7 +18,7 @@ class Assignment:
     def lookup_var(self, var):
         result = None
         for i in self._assignment:
-            if i.name == var:
+            if i._name == var:
                 result = i.value
                 break
         return result
@@ -26,7 +26,7 @@ class Assignment:
     def is_assigned(self, var):
         result = False
         for i in self._assignment:
-            if i.name == var:
+            if i._name == var:
                 result = True
                 break
         return result
