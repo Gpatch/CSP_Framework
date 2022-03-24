@@ -1,35 +1,34 @@
-import assignment
-import assignvar
 import domain
 from csps import csp
 from relations import VarsDiff
 from constraints import constraint
 from assignment import Assignment
-from assignvar import AV
+from bt import BT
 
 
+# MAP OF AUSTRALIA COLOURING PROBLEM DEMO
 def main():
-    aus_map_var_names = ["WA", "NSW", "NT", "Q", "V", "SA"]
-    aus_domains = [domain.Domain(i, [1, 2, 3]) for i in aus_map_var_names]
-    # aus_assignment = Assignment([AV("WA", 2), AV("NSW", 1)])
-    vars_diff_rel = VarsDiff(aus_map_var_names, [])
-    ausCSP = csp.CSP("AUSTRALIA MAP", aus_domains, assignment.Assignment([]),
-                     [constraint.Constraint('WA /= NT', ["WA", 'NT'], vars_diff_rel),
-                      constraint.Constraint('NT /= Q', ["NT", 'Q'], vars_diff_rel),
-                      constraint.Constraint('SA /= WA', ["SA", 'WA'], vars_diff_rel),
-                      constraint.Constraint('SA /= Q', ["SA", 'Q'], vars_diff_rel),
-                      constraint.Constraint('SA /= NT', ["SA", 'NT'], vars_diff_rel),
-                      constraint.Constraint('Q /= NSW', ["Q", 'NSW'], vars_diff_rel),
-                      constraint.Constraint('SA /= NSW', ["SA", 'NSW'], vars_diff_rel),
-                      constraint.Constraint('SA /= V', ["SA", 'V'], vars_diff_rel),
-                      constraint.Constraint('V /= NSW', ["V", 'NSW'], vars_diff_rel)
+    aus_map_var_names = ["WA", "NSW", "NT", "Q", "V", "SA"]  # Variables for the CSP as regions
+    aus_domains = [domain.Domain(i, [1, 2, 3]) for i in aus_map_var_names]  # List of domains for each region where
+    # numbers represent different colours
+
+    # We set the name, domains and the initial empty assignment for the csp. We also specify list of constraints
+    # between variables with a binary relation (for this specific problem) VarsDiff which tells that 2 variables must
+    # have different values assigned
+    ausCSP = csp.CSP("AUSTRALIA MAP", aus_domains, Assignment([]),
+                     [constraint.Constraint('WA /= NT', ["WA", 'NT'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('NT /= Q', ["NT", 'Q'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('SA /= WA', ["SA", 'WA'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('SA /= Q', ["SA", 'Q'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('SA /= NT', ["SA", 'NT'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('Q /= NSW', ["Q", 'NSW'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('SA /= NSW', ["SA", 'NSW'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('SA /= V', ["SA", 'V'], VarsDiff(aus_map_var_names, Assignment([]))),
+                      constraint.Constraint('V /= NSW', ["V", 'NSW'], VarsDiff(aus_map_var_names, Assignment([])))
                       ])
-
-
-    ausCSP.assignment.assign('WA', 1)
-    ausCSP.assignment.assign('WA', 2)
+    bt_solver = BT(ausCSP)
+    print(bt_solver.bt_recursion(ausCSP))
     print(ausCSP)
-
 
 
 main()

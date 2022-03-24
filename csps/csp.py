@@ -1,3 +1,6 @@
+from assignvar import AV
+
+
 class CSP:
     def __init__(self, name, domains, assignment, constraints):
         self.name = name
@@ -47,6 +50,14 @@ class CSP:
     def set_domains(self, domains):
         self.domains = domains
 
+    def get_domain(self, var):
+        correct_domain = []
+        for d in self.domains:
+            if d.var == var:
+                correct_domain = d.domain
+                break
+        return correct_domain
+
     def first_unassigned_var(self):
         unassigned = [x for x in self.csp_vars() if not self.assignment.is_assigned(x)]
         return unassigned[0]
@@ -72,11 +83,26 @@ class CSP:
         return consistent
 
     def is_consistent_value(self, var, val):
-        self.assignment.assign(var, val)
+        self.assign(var, val)
         consistent = self.is_consistent()
+        self.assignment.remove_av(var)
         return consistent
-        pass
 
+    def assign(self, var, val):
+        val_set = False
+        for i in self.assignment.assignment:
+            if i.name == var:
+                i.value = val
+                val_set = True
+                break
+        if not val_set:
+            self.assignment.assignment.append(AV(var, val))
+            self.update_assigment_rels()
 
+    def unassign(self, var):
+        self.assignment.remove_av(var)
 
-
+    def update_assigment_rels(self):
+        for c in self.constraints:
+            c.relation.assignment = self.assignment
+            c.relation.req_assignment_elem = len(self.assignment.assignment)

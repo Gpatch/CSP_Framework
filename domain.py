@@ -24,8 +24,8 @@ class Domain:
             if d == val:
                 exists = True
                 break
-            else:
-                self._domain.append(val)
+        if not exists:
+            self._domain.append(val)
 
     def domain_del(self, val):
         self._domain.remove(val)

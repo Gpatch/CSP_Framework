@@ -1,8 +1,15 @@
-from assignvar import AV
-
 class Assignment:
     def __init__(self, assignment: list):  # list of AV's
         self._assignment = assignment
+
+    @property
+    def assignment(self):
+        return self._assignment
+
+    def remove_av(self, var):
+        for a in self._assignment:
+            if a.name == var:
+                self._assignment.remove(a)
 
     def print_assignment(self):
         newline = '\n'
@@ -23,13 +30,3 @@ class Assignment:
                 result = True
                 break
         return result
-
-    def assign(self, var, val):
-        val_set = False
-        for i in self._assignment:
-            if i.name == var:
-                i.value = val
-                val_set = True
-                break
-        if not val_set:
-            self._assignment.append(AV(var, val))

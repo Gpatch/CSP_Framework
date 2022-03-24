@@ -2,13 +2,18 @@ from abc import ABC, abstractmethod
 
 
 class Constraint(ABC):
-    def __init__(self, name, variables, relation):
+    def __init__(self, name: str, variables: list, relation):
         self._name = name
         self._variables = variables
         self._relation = relation
+        self._relation.variables = self._variables
 
     def __str__(self):
         return self._name
+
+    @property
+    def relation(self):
+        return self._relation
 
     def check_constr(self):
         return self._relation.holds
@@ -30,5 +35,3 @@ class Constraint(ABC):
             if i != var:
                 nbs.append(i)
         return nbs
-
-
