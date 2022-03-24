@@ -58,8 +58,7 @@ The <b>Relation</b> abstract class represents the relation which some constraint
   <li>set_relation(abstract) A concrete class implements this method to set the relation value. It is up to the implementing concrete class 
     to decide if the relation is unary, binary or n-ary.
   Removes the specified variable from the assignment.</li>
-  Example of a standard, already implemented relation is <a href="https://github.com/Gpatch/CSP_Framework/blob/master/relations/vars_diff.py">vars_diff.py</a>
-.
+  Example of a standard, already implemented relation is <a href="https://github.com/Gpatch/CSP_Framework/blob/master/relations/vars_diff.py">vars_diff.py</a>.
 </ul>
 <br>
 <h3>Constraint</h3>
@@ -108,14 +107,14 @@ The <b>CSP</b> class represents the whole CSP problem with relevant variables, d
   <li>check_constraints():Boolean Checks if all constraints in the CSP are satisfied.</li>
   <li>csp_vars(): [String] Returns all the variables of the CSP.</li>
   <li>get_domain(var: String): [Type] Gets the domain for some variable.</li>
-  <li>first_unassigned_var(): String Gets the first variable for the variables list which has not been yet assigned.</li>
+  <li>first_unassigned_var(): String Gets the first variable from the variables list which has not been yet assigned.</li>
   <li>constraints_of(var: String): [Constraint] Gets all the constraints of some variable to which it is contrained.</li>
-  <li>all_neighbours_of(var: String): [String] Gets every neightbour of some variable from all the constraints related to this variable.</li>
+  <li>all_neighbours_of(var: String): [String] Gets every neighbour of some variable from all the constraints related to this variable.</li>
   <li>common_constraints(x: String, y: String): [Constraint] Gets a list of common constraints between 2 variables.</li>
   <li>is_complete(): Boolean Checks if the assigmnent is complete with all the variables.</li>
   <li>is_consistent(): Boolean Checks if the current assignment of the CSP is consistent by satisfying all the constraints.</li>
-  <li>is_consistent_value(var: String, val: Type): Boolean Checks if the the assignemnt fo the CSP would be consistent given this new variable assignment.</li>
-  <li>assign(var: String, val:String) Assigns a variable to a value and added to the assignment.</li>
+  <li>is_consistent_value(var: String, val: Type): Boolean Checks if the the assignemnt of the CSP would be consistent given this new variable assignment.</li>
+  <li>assign(var: String, val:Type) Assigns a variable to a value and added to the assignment.</li>
   <li>unassign(var:String) Removes the variable with its value from the CSP assignment</li>
 </ul>
 <br>
